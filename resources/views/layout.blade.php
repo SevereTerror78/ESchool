@@ -27,7 +27,8 @@
                     <li><a href="{{ route('SchoolClass.index') }}">year</a></li>
                     <li><a href="{{ route('subject.index') }}">Subject</a></li>
                     <li><a href="{{ route('student.index') }}">Student</a></li>
-                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('mark.index') }}">Mark</a></li>
+                    <!--<li><a href="{{ route('dashboard') }}">Dashboard</a></li>-->
                     @if (auth()->check())
                     <li>
                         <form action="{{ route('logout') }}"method="post">

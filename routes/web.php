@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\MarkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Mark;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,6 +38,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/student/{id}/edit', [StudentController::class, 'edit'])->name('student.edit');
     Route::put('/student/{id}', [StudentController::class, 'update'])->name('student.update');
     Route::delete('/student/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
+        
+    Route::get('/mark/create', [MarkController::class, 'create'])->name('mark.create');
+    Route::post('/mark', [MarkController::class, 'store'])->name('mark.store');
+    Route::get('/mark/{id}/edit', [MarkController::class, 'edit'])->name('mark.edit');
+    Route::put('/mark/{id}', [MarkController::class, 'update'])->name('mark.update');
+    Route::delete('/mark/{id}', [MarkController::class, 'destroy'])->name('mark.destroy');
 });
 
 Route::get('/schoolClass', [SchoolClassController::class, 'index'])->name('SchoolClass.index');
@@ -46,4 +54,7 @@ Route::get('/subject/{id}', [SubjectController::class, 'show'])->name('subject.s
 
 Route::get('/student', [StudentController::class, 'index'])->name('student.index');
 Route::get('/student/{id}', [StudentController::class, 'show'])->name('student.show');
+
+Route::get('/mark', [MarkController::class, 'index'])->name('mark.index');
+Route::get('/mark/{id}', [MarkController::class, 'show'])->name('mark.show');
 require __DIR__.'/auth.php';
