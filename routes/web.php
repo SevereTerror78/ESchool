@@ -46,8 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/mark/{id}', [MarkController::class, 'destroy'])->name('mark.destroy');
 
     
-    Route::get('echalk', [EChalkController::class, 'index'])->name('echalk.index');
-    Route::get('student-report', [EChalkController::class, 'index'])->name('student.report');
+    Route::get('/echalk', [EChalkController::class, 'index'])->name('echalk.index');
+    Route::get('/student-report', [EChalkController::class, 'index'])->name('student.report');
+    Route::post('/echalk/store', [EChalkController::class, 'store'])->name('echalk.store');
 });
 
 Route::get('/schoolClass', [SchoolClassController::class, 'index'])->name('SchoolClass.index');

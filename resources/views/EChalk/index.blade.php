@@ -37,33 +37,53 @@
         <button type="submit">Szűrés</button>
     </form>
 
-    <table>
+    @if(session('success'))
+        <p style="color: green;">{{ session('success') }}</p>
+    @endif
+
+    <table border="1">
         <thead>
             <tr>
                 <th>Diák neve</th>
                 <th>Jegyek</th>
                 <th>Átlag</th>
+                <th>Új jegy</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($students as $student)
-                <tr>
-                    <td>{{ $student->name }}</td>
-                    <td>
-                        @foreach ($student->mark->where('subject_id', request('subject_id')) as $mark)
-                            {{ $mark->mark }}@if (!$loop->last), @endif
-                        @endforeach
-                    </td>
-                    <td>
-                        @php
-                            $mark = $student->mark->where('subject_id', request('subject_id'))->pluck('marks');
-                            $average = $mark->isNotEmpty() ? $mark->avg() : 0;
-                        @endphp
-                        {{ number_format($average, 2) }}
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
+        @foreach ($students as $student)
+            <tr>
+                <td>{{ $student->name }}</td>
+                <td>
+                    @foreach ($student->mark as $mark)
+                        {{ $mark->marks }} @if (!$loop->last), @endif
+                    @endforeach
+                </td>
+                <td>
+                    @php
+                        $mark = $student->mark->where('subject_id', request('subject_id'))->pluck('marks');
+                        $average = $mark->isNotEmpty() ? $mark->avg() : 0;
+                    @endphp
+                    {{ number_format($average, 2) }}
+                </td>
+                <td>
+                    <form method="POST" action="{{ route('echalk.store') }}">
+                        @csrf
+                        <input type="hidden" name="student_id" value="{{ $student->id }}">
+                        <input type="hidden" name="subject_id" value="{{ request('subject_id') }}">
+                        
+                        <select name="marks" required>
+                            <option value="">Válassz</option>
+                            @for ($i = 1; $i <= 5; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select>
 
+                        <button type="submit">➕</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
     </table>
 @endsection

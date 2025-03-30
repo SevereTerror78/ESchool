@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Models\SchoolClass;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use App\Models\Mark;
 
 class EChalkController extends Controller
 {
@@ -33,5 +34,22 @@ class EChalkController extends Controller
     
 
         return view('echalk.index', compact('students', 'years', 'classes', 'subjects'));
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'subject_id' => 'required|exists:subjects,id',
+            'marks' => 'required|integer|min:1|max:5',
+        ]);
+
+        $mark = new Mark();
+        $mark->student_id = $request->student_id;
+        $mark->subject_id = $request->subject_id;
+        $mark->marks = (int) $request->marks; 
+        $mark->date = now();
+        $mark->save();
+    
+        return $this->index($request)->with('success', 'Jegy sikeresen hozzáadva.');
     }
 }
