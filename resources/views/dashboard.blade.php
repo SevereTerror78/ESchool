@@ -32,6 +32,11 @@
                         {{ __("Marks List" )}}
                     </a>
                 </div>
+                <div class="p-6 text-gray-900">
+                    <a href="{{ route('echalk.index') }}" class="p-6 text-gray-900">
+                        {{ __("EChalk" )}}
+                    </a>
+                </div>
             </div>
         </div>
     </div>

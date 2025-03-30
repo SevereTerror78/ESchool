@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\Mark;
+use App\Http\Controllers\EChalkController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -44,6 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/mark/{id}/edit', [MarkController::class, 'edit'])->name('mark.edit');
     Route::put('/mark/{id}', [MarkController::class, 'update'])->name('mark.update');
     Route::delete('/mark/{id}', [MarkController::class, 'destroy'])->name('mark.destroy');
+
+    
+    Route::get('echalk', [EChalkController::class, 'index'])->name('echalk.index');
+    Route::get('student-report', [EChalkController::class, 'index'])->name('student.report');
 });
 
 Route::get('/schoolClass', [SchoolClassController::class, 'index'])->name('SchoolClass.index');
