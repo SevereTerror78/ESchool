@@ -38,10 +38,11 @@
     <table>
         <thead>
             <tr>
-                <th>Tanuló</th>
-                <th>Tantárgy</th>
-                <th>Jegy</th>
-                <th>Akciók</th>
+                <th>student</th>
+                <th>subject</th>
+                <th>Mark</th>
+                <th>Date</th>
+                <th>options</th>
             </tr>
         </thead>
         <tbody>
@@ -50,6 +51,7 @@
                     <td>{{ $mark->student->name }}</td> 
                     <td>{{ $mark->subject->name }}</td> 
                     <td>{{ $mark->marks }}</td> 
+                    <td>{{ $mark->date }}</td>
                     <td>
                         <a href="{{ route('mark.show', $mark->id) }}"><i class="fa-solid fa-list-ul"></i></a>
                         @auth

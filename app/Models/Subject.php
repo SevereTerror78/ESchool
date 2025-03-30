@@ -12,4 +12,12 @@ class Subject extends Model
     {
         return $this->hasMany(Mark::class, 'subject_id');
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($subject) {
+            $subject->mark()->delete(); 
+        });
+    }
 }

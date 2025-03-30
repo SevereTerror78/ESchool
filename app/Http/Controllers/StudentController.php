@@ -45,7 +45,8 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($id);
         $student->delete();
-        return redirect()->route('student.index')->with('success', 'Az osztály sikeresen törölve.');
+    
+        return redirect()->route('student.index')->with('success', 'A diák és a hozzá tartozó jegyek sikeresen törölve.');
     }
     public function store(Request $request)
     {

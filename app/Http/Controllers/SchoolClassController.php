@@ -39,9 +39,10 @@ class SchoolClassController extends Controller
 
     public function destroy($id)
     {
-        $class = SchoolClass::findOrFail($id);
-        $class->delete();
-        return redirect()->route('SchoolClass.index')->with('success', 'Az osztály sikeresen törölve.');
+        $schoolClass = SchoolClass::findOrFail($id);
+        $schoolClass->delete();
+    
+        return redirect()->route('SchoolClass.index')->with('success', 'Osztály és a hozzá tartozó diákok/jegyek sikeresen törölve.');
     }
     public function store(Request $request)
     {

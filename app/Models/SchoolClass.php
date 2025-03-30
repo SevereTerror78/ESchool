@@ -13,4 +13,16 @@ class SchoolClass extends Model
     {
         return $this->hasMany(Student::class, 'class_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($schoolClass) {
+            foreach ($schoolClass->students as $student) {
+                $student->mark()->delete(); 
+                $student->delete();
+            }
+        });
+    }
 }

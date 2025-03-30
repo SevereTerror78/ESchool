@@ -40,7 +40,8 @@ class SubjectController extends Controller
     {
         $subject = Subject::findOrFail($id);
         $subject->delete();
-        return redirect()->route('subject.index')->with('success', 'Az osztály sikeresen törölve.');
+    
+        return redirect()->route('subject.index')->with('success', 'A tantárgy és a hozzá tartozó jegyek sikeresen törölve.');
     }
     public function store(Request $request)
     {

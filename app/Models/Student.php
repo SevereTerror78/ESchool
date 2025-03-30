@@ -16,4 +16,12 @@ class Student extends Model
     {
         return $this->hasMany(Mark::class, 'student_id');
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($student) {
+            $student->mark()->delete(); 
+        });
+    }
 }

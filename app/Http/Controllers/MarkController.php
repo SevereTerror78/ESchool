@@ -69,19 +69,19 @@ class MarkController extends Controller
         $request->validate([
             'student_id' => 'required|exists:students,id',
             'subject_id' => 'required|exists:subjects,id',
-            'marks' => 'required|numeric',
+            'marks' => 'required|integer|min:1|max:5',
         ]);
-
-        Mark::create([
-            'student_id' => $request->student_id,
-            'subject_id' => $request->subject_id,
-            'marks' => $request->marks,  
-            'date' => now(),
-        ]);
-
+    
+        $mark = new Mark();
+        $mark->student_id = $request->student_id;
+        $mark->subject_id = $request->subject_id;
+        $mark->marks = (int) $request->marks; 
+        $mark->date = now();
+        $mark->save();
+    
         return redirect()->route('mark.index')->with('success', 'Jegy sikeresen hozzáadva.');
     }
-
+    
     public function create()
     {
         $students = Student::all(); 
