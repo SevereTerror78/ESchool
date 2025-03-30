@@ -9,12 +9,25 @@ use Illuminate\Http\Request;
 
 class MarkController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $marks = Mark::with(['student', 'subject'])->get();
-        //dd($marks->toArray());
-        return view('mark.index', compact('marks'));
+        $query = Mark::query();
+    
+        if ($request->has('subject') && $request->subject) {
+            $query->where('subject_id', $request->subject);
+        }
+    
+        if ($request->has('student') && $request->student) {
+            $query->where('student_id', $request->student);
+        }
+    
+        $marks = $query->get();
+        $subjects = Subject::all();
+        $students = Student::all();
+    
+        return view('mark.index', compact('marks', 'subjects', 'students'));
     }
+    
 
     public function edit($id)
     {

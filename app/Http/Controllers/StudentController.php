@@ -4,20 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\SchoolClass;
 
 class StudentController extends Controller
 {
     public function index()
     { 
         $students = Student::with('schoolClass')->get(); 
+        $classes = SchoolClass::all();
         
-        return view('student.index', compact('students'));
+        return view('student.index', compact('students', 'classes'));
     }
 
     public function edit($id)
     {
+        $classes = SchoolClass::all(); 
         $student = Student::findOrFail($id);
-        return view('student.edit', compact('student'));
+        return view('student.edit', compact('student', 'classes'));
     }
 
     public function show($id)
@@ -56,6 +59,8 @@ class StudentController extends Controller
     }
     public function create()
     {
-        return view('student.create');
+        $classes = SchoolClass::all(); 
+        return view('student.create', compact('classes')); 
     }
+    
 }

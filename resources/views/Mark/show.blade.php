@@ -1,11 +1,11 @@
 @extends('layout')
 
 @section('content')
-    <h1>Subject details:</h1>
+    <h1>Marks details:</h1>
     
-    <a href="{{ route('subject.index') }}">Back</a>
+    <a href="{{ route('mark.index') }}">Back</a>
     <div>
-        <p><strong>Név:</strong> {{ $subject->name }}</p>
-        {{dd($subject)}}
+        <p><strong>Név:</strong> {{ $mark->name }}</p>
+        {{dd($mark)}}
     </div>
 @endsection
