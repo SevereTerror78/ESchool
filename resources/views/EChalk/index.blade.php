@@ -44,10 +44,10 @@
     <table border="1">
         <thead>
             <tr>
-                <th>Diák neve</th>
-                <th>Jegyek</th>
-                <th>Átlag</th>
-                <th>Új jegy</th>
+                <th>Student name</th>
+                <th>Marks</th>
+                <th>Avarage</th>
+                <th>New mark</th>
             </tr>
         </thead>
         <tbody>
@@ -55,14 +55,23 @@
             <tr>
                 <td>{{ $student->name }}</td>
                 <td>
-                    @foreach ($student->mark as $mark)
+                    @php
+                        $filteredMarks = $student->mark->filter(function ($m) {
+                            return $m->subject_id == request('subject_id');
+                        });
+                    @endphp
+                    
+                    @foreach ($filteredMarks as $mark)
                         {{ $mark->marks }} @if (!$loop->last), @endif
                     @endforeach
                 </td>
                 <td>
                     @php
-                        $mark = $student->mark->where('subject_id', request('subject_id'))->pluck('marks');
-                        $average = $mark->isNotEmpty() ? $mark->avg() : 0;
+                        $marks = $student->mark->filter(function ($m) {
+                            return $m->subject_id == request('subject_id');
+                        })->pluck('marks');
+
+                        $average = $marks->isNotEmpty() ? $marks->avg() : 0;
                     @endphp
                     {{ number_format($average, 2) }}
                 </td>
@@ -79,7 +88,7 @@
                             @endfor
                         </select>
 
-                        <button type="submit">➕</button>
+                        <button type="submit"><i class="fa-solid fa-plus"></i></button>
                     </form>
                 </td>
             </tr>
