@@ -10,7 +10,7 @@
         @method('PUT')
 
         <div>
-            <label for="name">Osztály neve:</label>
+            <label for="name">Class name:</label>
             <input type="text" id="name" name="name" value="{{ old('name', $class->name) }}" required>
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>

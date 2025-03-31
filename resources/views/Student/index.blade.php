@@ -34,7 +34,7 @@
                             <form action="{{ route('student.destroy', $student->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd az osztályt?')" style="border:none; background:none; cursor:pointer;">
+                                <button type="submit" onclick="return confirm('Are you sure?')" style="border:none; background:none; cursor:pointer;">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
@@ -46,6 +46,6 @@
     </table>
 
     @auth
-        <a href="{{ route('student.create') }}">Új osztály hozzáadása</a>
+        <a href="{{ route('student.create') }}">Add new student</a>
     @endauth
 @endsection

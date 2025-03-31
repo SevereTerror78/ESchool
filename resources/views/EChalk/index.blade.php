@@ -1,13 +1,13 @@
 @extends('layout')
 
 @section('content')
-    <h1>Diákok jelentése</h1>
+    <h1>Main site</h1>
 
     <form method="GET" action="{{ route('student.report') }}">
         <div>
-            <label for="year">Év</label>
+            <label for="year">Year:</label>
             <select name="year" id="year">
-                <option value="">Válassz évet</option>
+                <option value="">None</option>
                 @foreach ($years as $year)
                     <option value="{{ $year->year }}" {{ request('year') == $year->year ? 'selected' : '' }}>{{ $year->year }}</option>
                 @endforeach
@@ -15,9 +15,9 @@
         </div>
 
         <div>
-            <label for="class_id">Osztály</label>
+            <label for="class_id">Class:</label>
             <select name="class_id" id="class_id">
-                <option value="">Válassz osztályt</option>
+                <option value="">None</option>
                 @foreach ($classes as $class)
                     <option value="{{ $class->id }}" {{ request('class_id') == $class->id ? 'selected' : '' }}>{{ $class->name }}</option>
                 @endforeach
@@ -25,16 +25,16 @@
         </div>
 
         <div>
-            <label for="subject_id">Tantárgy</label>
+            <label for="subject_id">Subject:</label>
             <select name="subject_id" id="subject_id">
-                <option value="">Válassz tantárgyat</option>
+                <option value="">None</option>
                 @foreach ($subjects as $subject)
                     <option value="{{ $subject->id }}" {{ request('subject_id') == $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
                 @endforeach
             </select>
         </div>
 
-        <button type="submit">Szűrés</button>
+        <button type="submit">Find</button>
     </form>
 
     @if(session('success'))
@@ -62,9 +62,11 @@
                     @endphp
                     
                     @foreach ($filteredMarks as $mark)
-                        {{ $mark->marks }} @if (!$loop->last), @endif
+                        <span title="Date: {{ $mark->date }}" class="tooltip-text">{{ $mark->marks }}</span>
+                        @if (!$loop->last), @endif
                     @endforeach
                 </td>
+
                 <td>
                     @php
                         $marks = $student->mark->filter(function ($m) {
@@ -82,7 +84,7 @@
                         <input type="hidden" name="subject_id" value="{{ request('subject_id') }}">
                         
                         <select name="marks" required>
-                            <option value="">Válassz</option>
+                            <option value="">option</option>
                             @for ($i = 1; $i <= 5; $i++)
                                 <option value="{{ $i }}">{{ $i }}</option>
                             @endfor

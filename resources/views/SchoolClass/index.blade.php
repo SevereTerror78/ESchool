@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Osztályok listája</h1>
+    <h1>Class-year list</h1>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -13,9 +13,9 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Osztály neve</th>
-                <th>Év</th>
-                <th>Akciók</th>
+                <th>Class name</th>
+                <th>Year</th>
+                <th>Buttons</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +33,7 @@
                             <form action="{{ route('schoolClass.destroy', $class->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')    
-                                <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd az osztályt?')" style="border:none; background:none; cursor:pointer;">
+                                <button type="submit" onclick="return confirm('Are you suer?')" style="border:none; background:none; cursor:pointer;">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
@@ -45,6 +45,6 @@
     </table>
 
     @auth
-        <a href="{{ route('schoolClass.create') }}">Új osztály hozzáadása</a>
+        <a href="{{ route('schoolClass.create') }}">Add new</a>
     @endauth
 @endsection

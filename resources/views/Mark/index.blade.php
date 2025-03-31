@@ -9,12 +9,12 @@
         </div>
     @endif
     @auth
-        <a href="{{ route('mark.create') }}">Új osztály hozzáadása</a>
+        <a href="{{ route('mark.create') }}">Add new subject</a>
     @endauth
     <form method="GET" action="{{ route('mark.index') }}">
-        <label for="subject">Tantárgy:</label>
+        <label for="subject">Subject:</label>
         <select name="subject" id="subject">
-            <option value="">Összes tantárgy</option>
+            <option value="">None</option>
             @foreach($subjects as $subject)
                 <option value="{{ $subject->id }}" {{ request('subject') == $subject->id ? 'selected' : '' }}>
                     {{ $subject->name }}
@@ -22,9 +22,9 @@
             @endforeach
         </select>
 
-        <label for="student">Tanuló:</label>
+        <label for="student">Student:</label>
         <select name="student" id="student">
-            <option value="">Összes tanuló</option>
+            <option value="">None</option>
             @foreach($students as $student)
                 <option value="{{ $student->id }}" {{ request('student') == $student->id ? 'selected' : '' }}>
                     {{ $student->name }}
@@ -32,7 +32,7 @@
             @endforeach
         </select>
 
-        <button type="submit">Szűrés</button>
+        <button type="submit">Find</button>
     </form>
 
     <table>
@@ -60,9 +60,10 @@
                             <form action="{{ route('mark.destroy', $mark->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd az osztályt?')" style="border:none; background:none; cursor:pointer;">
+                                <button type="submit" onclick="return confirm('{!! __('messages.are_you_sure') !!}')" style="border:none; background:none; cursor:pointer;">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
+
                             </form>
                         @endauth
                     </td>
