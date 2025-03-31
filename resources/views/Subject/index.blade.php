@@ -30,7 +30,7 @@
                             <form action="{{ route('subject.destroy', $subject->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd az osztályt?')" style="border:none; background:none; cursor:pointer;">
+                                <button type="submit" onclick="return confirm('{!! __('messages.are_you_sure') !!}')" style="border:none; background:none; cursor:pointer;">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>

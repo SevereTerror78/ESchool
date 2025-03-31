@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Új jegy hozzáadása</h1>
+    <h1>New mark</h1>
 
     <form action="{{ route('mark.store') }}" method="POST">
         @csrf

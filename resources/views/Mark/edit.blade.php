@@ -3,7 +3,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Osztály Módosítása</h1>
+    <h1>Mark Modif</h1>
 
     <form action="{{ route('subject.update', $subject->id) }}" method="POST">
         @csrf

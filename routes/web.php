@@ -49,6 +49,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/echalk', [EChalkController::class, 'index'])->name('echalk.index');
     Route::get('/student-report', [EChalkController::class, 'index'])->name('student.report');
     Route::post('/echalk/store', [EChalkController::class, 'store'])->name('echalk.store');
+
+    Route::post('/language-change', function (Illuminate\Http\Request $request) {
+        session(['locale' => $request->language]);
+        app()->setLocale($request->language);
+        return back();
+    })->name('language.change');
+    
+
 });
 
 Route::get('/schoolClass', [SchoolClassController::class, 'index'])->name('SchoolClass.index');

@@ -3,7 +3,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Osztály Módosítása</h1>
+    <h1>Osztály Modif</h1>
 
     <form action="{{ route('schoolClass.update', $class->id) }}" method="POST">
         @csrf
@@ -26,9 +26,9 @@
         </div>
 
         <div>
-            <button type="submit">Módosítás mentése</button>
+            <button type="submit">Save</button>
         </div>
     </form>
 
-    <a href="{{ route('SchoolClass.index') }}">Vissza az osztályok listájához</a>
+    <a href="{{ route('SchoolClass.index') }}">Back</a>
 @endsection

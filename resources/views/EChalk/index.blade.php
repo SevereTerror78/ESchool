@@ -22,8 +22,13 @@
                     <option value="{{ $class->id }}" {{ request('class_id') == $class->id ? 'selected' : '' }}>{{ $class->name }}</option>
                 @endforeach
             </select>
+            <!--Az oszályátlag (minden tantárgy átlaga ehez az osztályhoz)-->
+            @php
+                $classMarks = $students->where('class_id', request('class_id'))->flatMap->mark->pluck('marks');
+                $classAverage = $classMarks->isNotEmpty() ? $classMarks->avg() : 0;
+            @endphp
+            Class Average: {{ number_format($classAverage, 2) }}    
         </div>
-
         <div>
             <label for="subject_id">Subject:</label>
             <select name="subject_id" id="subject_id">
@@ -32,6 +37,12 @@
                     <option value="{{ $subject->id }}" {{ request('subject_id') == $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
                 @endforeach
             </select>
+            <!--Az tantárgy átlag (minden diák átlaga ehez a tantárgyhot ami a kiválasztott osztályba tartozik)-->
+            @php
+                $subjectMarks = $students->flatMap->mark->where('subject_id', request('subject_id'))->pluck('marks');
+                $subjectAverage = $subjectMarks->isNotEmpty() ? $subjectMarks->avg() : 0;
+            @endphp
+            Subject Average: {{ number_format($subjectAverage, 2) }}
         </div>
 
         <button type="submit">Find</button>

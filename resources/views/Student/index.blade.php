@@ -34,7 +34,7 @@
                             <form action="{{ route('student.destroy', $student->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Are you sure?')" style="border:none; background:none; cursor:pointer;">
+                                <button type="submit" onclick="return confirm('{!! __('messages.are_you_sure') !!}')" style="border:none; background:none; cursor:pointer;">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>

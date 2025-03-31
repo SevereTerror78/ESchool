@@ -5,7 +5,7 @@
     
     <a href="{{ route('student.index') }}">Back</a>
     <div>
-        <p><strong>Név:</strong> {{ $student->name }}</p>
+        <p><strong>Name:</strong> {{ $student->name }}</p>
         {{dd($student)}}
     </div>
 @endsection

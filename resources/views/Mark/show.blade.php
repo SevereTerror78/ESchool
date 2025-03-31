@@ -5,7 +5,7 @@
     
     <a href="{{ route('mark.index') }}">Back</a>
     <div>
-        <p><strong>Név:</strong> {{ $mark->name }}</p>
+        <p><strong>Name:</strong> {{ $mark->name }}</p>
         {{dd($mark)}}
     </div>
 @endsection

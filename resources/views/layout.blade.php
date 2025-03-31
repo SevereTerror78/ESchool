@@ -43,7 +43,15 @@
                     @else  
                         <li><a href="{{ route('login') }}">Login</a></li>
                     @endif
-                    
+                    <li>
+                    <form action="{{ route('language.change') }}" method="POST">
+                        @csrf
+                        <select name="language" onchange="this.form.submit()">
+                            <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>🇬🇧</option>
+                            <option value="hu" {{ app()->getLocale() == 'hu' ? 'selected' : '' }}>🇭🇺(x)</option>
+                        </select>
+                    </form>
+                </li>
                 </ul>
             </nav>
         </div>
