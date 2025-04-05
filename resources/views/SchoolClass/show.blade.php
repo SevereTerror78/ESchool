@@ -1,10 +1,10 @@
 @extends('layout')
 
 @section('content')
-    <h1>Details></h1>
+    <h1>{{__('messages.details')}}</h1>
     <div>
-        <p><strong>Name:</strong> {{ $class->name }}</p>
-        <p><strong>Year:</strong> {{ $class->year }}</p>
+        <p><strong>{{__('messages.class')}}</strong> {{ $class->name }}</p>
+        <p><strong>{{__('messages.year')}}</strong> {{ $class->year }}</p>
     </div>
-    <a href="{{ route('SchoolClass.index') }}">Back</a>
+    <a href="{{ route('SchoolClass.index') }}">{{__('messages.back')}}</a>
 @endsection

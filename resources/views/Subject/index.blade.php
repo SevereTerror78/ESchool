@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Subject list</h1>
+    <h1>{{ __('messages.subject') }}</h1>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -12,8 +12,9 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Subject</th>
+                <th>{{ __('messages.id') }}</th>
+                <th>{{ __('messages.subject') }}</th>
+                <th>{{ __('messages.option') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -42,6 +43,6 @@
     </table>
 
     @auth
-        <a href="{{ route('subject.create') }}">Új osztály hozzáadása</a>
+        <a href="{{ route('subject.create') }}">{{ __('messages.new_subject') }}</a>
     @endauth
 @endsection

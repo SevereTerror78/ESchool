@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mark extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['subject_id', 'student_id', 'name'];
+    protected $fillable = ['subject_id', 'student_id', 'marks'];
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');

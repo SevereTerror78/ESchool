@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Students list</h1>
+    <h1>{{__('messages.student')}}</h1>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -12,10 +12,11 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Student</th>
-                <th>class</th>
-                <th>Sex</th>
+                <th>{{__('messages.id')}}</th>
+                <th>{{__('messages.student_name')}}</th>
+                <th>{{__('messages.class')}}</th>
+                <th>{{__('messages.sex')}}</th>
+                <th>{{ __('messages.option') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,6 @@
     </table>
 
     @auth
-        <a href="{{ route('student.create') }}">Add new student</a>
+        <a href="{{ route('student.create') }}">{{__('messages.new_student')}}</a>
     @endauth
 @endsection

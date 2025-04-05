@@ -1,11 +1,11 @@
 @extends('layout')
 
 @section('content')
-    <h1>Student details:</h1>
+    <h1>{{ __('messages.details') }}</h1>
     
-    <a href="{{ route('student.index') }}">Back</a>
+    <a href="{{ route('student.index') }}">{{ __('messages.back') }}</a>
     <div>
-        <p><strong>Name:</strong> {{ $student->name }}</p>
+        <p><strong>{{ __('messages.student') }}:</strong> {{ $student->name }}</p>
         {{dd($student)}}
     </div>
 @endsection

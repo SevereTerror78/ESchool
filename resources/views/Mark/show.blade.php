@@ -1,11 +1,11 @@
 @extends('layout')
 
 @section('content')
-    <h1>Marks details:</h1>
+    <h1>{{ __('messages.details') }}</h1>
     
-    <a href="{{ route('mark.index') }}">Back</a>
+    <a href="{{ route('mark.index') }}">{{ __('messages.back') }}</a>
     <div>
-        <p><strong>Name:</strong> {{ $mark->name }}</p>
+        <p><strong>{{ __('messages.student_name') }}</strong> {{ $mark->name }}</p>
         {{dd($mark)}}
     </div>
 @endsection

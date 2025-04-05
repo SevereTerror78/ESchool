@@ -26,22 +26,22 @@
         <div class="row">
             <nav>
                 <ul>
-                    <li><a href="{{ route('SchoolClass.index') }}">Year</a></li>
-                    <li><a href="{{ route('subject.index') }}">Subject</a></li>
-                    <li><a href="{{ route('student.index') }}">Student</a></li>
-                    <li><a href="{{ route('mark.index') }}">Mark</a></li>
-                    <li><a href="{{ route('echalk.index') }}">EChalk</a></li>
-                    <!--<li><a href="{{ route('dashboard') }}">Dashboard</a></li>-->
+                    <li><a href="{{ route('SchoolClass.index') }}">{{ __('messages.dashboard_year') }}</a></li>
+                    <li><a href="{{ route('subject.index') }}">{{ __('messages.dashboard_subject') }}</a></li>
+                    <li><a href="{{ route('student.index') }}">{{ __('messages.dashboard_student') }}</a></li>
+                    <li><a href="{{ route('mark.index') }}">{{ __('messages.dashboard_mark') }}</a></li>
+                    <li><a href="{{ route('echalk.index') }}">{{ __('messages.dashboard_echalk') }}</a></li>
                     @if (auth()->check())
                     <li>
                         <form action="{{ route('logout') }}"method="post">
                             @csrf
-                            <button type="submit">Logout {{ auth()->user()->name }}</button>
+                            <button type="submit">{{__('messages.dashboard_logout')}} {{ auth()->user()->name }}</button>
                         </form>
                         
                     </li>
                     @else  
-                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('login') }}">{{__('messages.dashboard_login')}}</a></li>
+                        <li><a href="{{ route('register') }}">{{__('messages.dashboard_register')}}</a></li>
                     @endif
                     <li>
                     <form action="{{ route('language.change') }}" method="POST">

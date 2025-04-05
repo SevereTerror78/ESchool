@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Marks List</h1>
+    <h1>{{ __('messages.marks') }}</h1>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -9,12 +9,12 @@
         </div>
     @endif
     @auth
-        <a href="{{ route('mark.create') }}">Add new subject</a>
+        <a href="{{ route('mark.create') }}">{{ __('messages.add_mark') }}</a>
     @endauth
     <form method="GET" action="{{ route('mark.index') }}">
-        <label for="subject">Subject:</label>
+        <label for="subject">{{ __('messages.subject') }}</label>
         <select name="subject" id="subject">
-            <option value="">None</option>
+            <option value="">{{ __('messages.none') }}</option>
             @foreach($subjects as $subject)
                 <option value="{{ $subject->id }}" {{ request('subject') == $subject->id ? 'selected' : '' }}>
                     {{ $subject->name }}
@@ -22,9 +22,9 @@
             @endforeach
         </select>
 
-        <label for="student">Student:</label>
+        <label for="student">{{ __('messages.student_name') }}</label>
         <select name="student" id="student">
-            <option value="">None</option>
+            <option value="">{{ __('messages.none') }}</option>
             @foreach($students as $student)
                 <option value="{{ $student->id }}" {{ request('student') == $student->id ? 'selected' : '' }}>
                     {{ $student->name }}
@@ -32,17 +32,17 @@
             @endforeach
         </select>
 
-        <button type="submit">Find</button>
+        <button type="submit">{{ __('messages.find') }}</button>
     </form>
 
     <table>
         <thead>
             <tr>
-                <th>student</th>
-                <th>subject</th>
-                <th>Mark</th>
-                <th>Date</th>
-                <th>options</th>
+                <th>{{ __('messages.student_name') }}</th>
+                <th>{{ __('messages.subject') }}</th>
+                <th>{{ __('messages.marks') }}</th>
+                <th>{{ __('messages.date') }}</th>
+                <th>{{ __('messages.option') }}</th>
             </tr>
         </thead>
         <tbody>

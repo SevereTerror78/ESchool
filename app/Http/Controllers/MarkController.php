@@ -28,13 +28,15 @@ class MarkController extends Controller
         return view('mark.index', compact('marks', 'subjects', 'students'));
     }
     
-
     public function edit($id)
     {
         $mark = Mark::findOrFail($id);
-
-        return view('mark.edit', compact('mark'));
+        $students = Student::all();
+        $subjects = Subject::all();
+    
+        return view('mark.edit', compact('mark', 'students', 'subjects'));
     }
+    
 
     public function show($id)
     {
@@ -45,16 +47,20 @@ class MarkController extends Controller
     public function update(Request $request, $id)
     {
         $mark = Mark::findOrFail($id);
-
+        
         $request->validate([
-            'name' => 'required|string|max:255',
-            'student_id' => 'required|int',
-            'subject_id' => 'required|int',
+            'student_id' => 'required|exists:students,id',
+            'subject_id' => 'required|exists:subjects,id',
+            'marks' => 'required|integer|min:1|max:5',
         ]);
-
-        $mark->update($request->all());
-
-        return redirect()->route('mark.index')->with('success', 'A jegy sikeresen módosítva.');
+    
+        $mark->update([
+            'student_id' => $request->student_id,
+            'subject_id' => $request->subject_id,
+            'marks' => $request->marks, 
+        ]);
+        
+        return redirect()->route('mark.index')->with('success','A módosítás sikers volt');
     }
 
     public function destroy($id)
@@ -71,7 +77,7 @@ class MarkController extends Controller
             'subject_id' => 'required|exists:subjects,id',
             'marks' => 'required|integer|min:1|max:5',
         ]);
-    
+
         $mark = new Mark();
         $mark->student_id = $request->student_id;
         $mark->subject_id = $request->subject_id;
@@ -79,7 +85,7 @@ class MarkController extends Controller
         $mark->date = now();
         $mark->save();
     
-        return redirect()->route('mark.index')->with('success', 'Jegy sikeresen hozzáadva.');
+        return $this->index($request)->with('success', 'Jegy sikeresen hozzáadva.');
     }
     
     public function create()

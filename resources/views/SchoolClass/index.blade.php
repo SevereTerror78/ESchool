@@ -12,10 +12,10 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Class name</th>
-                <th>Year</th>
-                <th>Buttons</th>
+                <th>{{ __('messages.id') }}</th>
+                <th>{{ __('messages.class') }}</th>
+                <th>{{ __('messages.year') }}</th>
+                <th>{{ __('messages.option') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -45,6 +45,6 @@
     </table>
 
     @auth
-        <a href="{{ route('schoolClass.create') }}">Add new</a>
+        <a href="{{ route('schoolClass.create') }}">{{__('messages.new_class')}}</a>
     @endauth
 @endsection

@@ -6,11 +6,13 @@ use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EChalkController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
-
+/*
 Route::get('/', function () {
     return view('welcome');
-});
+});*/
+Route::get('/', [EChalkController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -70,4 +72,7 @@ Route::get('/student/{id}', [StudentController::class, 'show'])->name('student.s
 
 Route::get('/mark', [MarkController::class, 'index'])->name('mark.index');
 Route::get('/mark/{id}', [MarkController::class, 'show'])->name('mark.show');
+
+Route::post('language/change', [LanguageController::class, 'change'])->name('language.change');
+
 require __DIR__.'/auth.php';
