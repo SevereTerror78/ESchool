@@ -43,7 +43,7 @@
                         <li><a href="{{ route('login') }}">{{__('messages.dashboard_login')}}</a></li>
                         <li><a href="{{ route('register') }}">{{__('messages.dashboard_register')}}</a></li>
                     @endif
-                    <li>
+                    <!--<li>
                     <form action="{{ route('language.change') }}" method="POST">
                         @csrf
                         <select name="language" onchange="this.form.submit()">
@@ -51,6 +51,44 @@
                             <option value="hu" {{ app()->getLocale() == 'hu' ? 'selected' : '' }}>🇭🇺(x)</option>
                         </select>
                     </form>
+                </li>-->
+                <li>
+                <meta name="csrf-token" content="{{ csrf_token() }}">
+
+                    <select id="language-select">
+                        <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English</option>
+                        <option value="hu" {{ app()->getLocale() == 'hu' ? 'selected' : '' }}>Magyar</option>
+                    </select>
+
+                    <script>
+                    document.getElementById('language-select').addEventListener('change', function () {
+                        const selectedLang = this.value;
+                        console.log("Nyelv kiválasztva:", selectedLang); // ← ellenőrzés
+                        
+                        fetch("{{ route('language.change') }}", {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            },
+                            body: JSON.stringify({
+                                language: selectedLang
+                            })
+                        })
+                        .then(response => {
+                            console.log("Válasz:", response.status);
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log("Backend válasza:", data);
+                            location.reload();
+                        })
+                        .catch(error => {
+                            console.error("Hiba történt:", error);
+                        });
+                    });
+                    </script>
+
                 </li>
                 </ul>
             </nav>

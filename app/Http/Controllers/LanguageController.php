@@ -8,8 +8,9 @@ class LanguageController extends Controller
 {
     public function change(Request $request)
     {
+        dd($request->all());
         $request->session()->put('locale', $request->language);
-        
-        return redirect()->back();
+        return response()->json(['status' => 'ok']);
     }
+    
 }

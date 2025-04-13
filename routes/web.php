@@ -51,12 +51,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/echalk', [EChalkController::class, 'index'])->name('echalk.index');
     Route::get('/student-report', [EChalkController::class, 'index'])->name('student.report');
     Route::post('/echalk/store', [EChalkController::class, 'store'])->name('echalk.store');
-
+/*
     Route::post('/language-change', function (Illuminate\Http\Request $request) {
         session(['locale' => $request->language]);
         app()->setLocale($request->language);
         return back();
-    })->name('language.change');
+    })->name('language.change');*/
     
 
 });
@@ -72,7 +72,6 @@ Route::get('/student/{id}', [StudentController::class, 'show'])->name('student.s
 
 Route::get('/mark', [MarkController::class, 'index'])->name('mark.index');
 Route::get('/mark/{id}', [MarkController::class, 'show'])->name('mark.show');
-
-Route::post('language/change', [LanguageController::class, 'change'])->name('language.change');
+Route::post('/language/change', [LanguageController::class, 'change'])->name('language.change');
 
 require __DIR__.'/auth.php';

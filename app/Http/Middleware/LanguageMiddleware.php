@@ -15,6 +15,8 @@ class LanguageMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        
+        dd($request->all());
         // Ellenőrizzük, hogy van-e 'locale' a session-ben
         if (session()->has('locale')) {
             app()->setLocale(session('locale'));
